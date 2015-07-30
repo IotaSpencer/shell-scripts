@@ -9,7 +9,7 @@ import sys
 admin_block = []
 hosts = []
 #Config
-v = "unrealgen 0.1"
+v = "unrealgen 0.5"
 #Classes
 class CustomError(Exception):
     def __init__(self, value):
@@ -21,7 +21,7 @@ def checkInt(s):
     try:
         int(s)
     except:
-        print(colored("Error","red",attrs=["bold"]) + ": Numeric must be an integer 0-254", file=sys.stderr) 
+        print(colored("Error", "red", attrs=["bold"]) + ": Numeric must be an integer 0-254", file=sys.stderr) 
         sys.exit(2)
 def checkMethod(s):
     if s in ("ripemd160", "sha1", "md5"):
