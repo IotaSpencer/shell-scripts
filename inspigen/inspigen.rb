@@ -44,13 +44,13 @@ opts = Slop.parse ARGV do |o|
     when "conf"
       Gen.conf
     when "oper"
-      Gen.opers.conf
+      Gen.opers
     when "link"
-      Gen.links.conf
+      Gen.links
     when "connect"
       Gen.connect
     when "listen"
-      Gen.listen.conf
+      Gen.listen
     else
       STDERR.puts "Invalid Selection."
       exit 1
