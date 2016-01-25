@@ -1,54 +1,45 @@
 #! /usr/bin/env ruby
 # -*- coding: utf-8 -*-
-require 'optparse'
+#require 'optparse'
+require 'slop'
+require 'highline'
 
-admin_block = []
-hosts = []
+
 #Config
 @Version = [0,0,5]
-#Classes
-class GeneratorError < StandardError
 
-    def __init__(self, value):
-        self.parameter = value
-    def __str__(self):
-        return repr(self.parameter)
-#Checks
-def checkInt(s):
-    try:
-        int(s)
-    except:
-        print(colored("Error", "red", attrs=["bold"]) + ": Numeric must be an integer 0-254", file=sys.stderr)
-        sys.exit(2)
-def checkMethod(s):
-    if s in ("ripemd160", "sha1", "md5"):
-        pass
-    else:
-        raise CustomError("Error: Method not supported")
 ###
 # Code
 ###
-def makeArguments():
-    p = ArgumentParser(formatter_class=RawTextHelpFormatter, description=
-    """
-    -    This script can make your "job" as server owner,
+options = {}
+admin_block = []
+hosts = []
+opts = Slop.parse do |o|
+  o.banner "Usage: #{ARGV[0]} [options] ....."
+  o.seperator ""
+  o.seperator "
+    -    This script can make your 'job' as server owner,
     -    routing team member, or just starting your own
     -    server up a whole lot easier
     -    Currently this script will have the capability of doing configuration
     -    files, except the allow, link, and oper blocks since they can be
     -    included from elsewhere
-    """)
-    p.add_argument("-y", "--yes", action="store_true", help="Show confirmation that you have read the help")
-    p.add_argument("-v", "--version", action="version", version=v)
-    p.add_argument("-t", "--type", action="store", dest="TYPE", choices=["allow", "conf", "listen", "oper", "link"], help="Makes configuration files using your input.  It can make 'full' configuration files, oper blocks, and link blocks and allow blocks.")
-    argcomplete.autocomplete(p)
-    global args
-    args = p.parse_args()
+    "
+  o.string "-y", "--yes", "Show confirmation that you have read the help"
+  o.string "-t", "--type", "Type of configuration file to generate"
+
+  o.on '-v', '--version' do
+    puts @Version.join(".")
+  end
+end
+
+puts opts
+=begin
 # Code
 def conf():
     stderr.puts "This is the configuration file generator"
 # Conf generation
-    # Me {}
+    # <server >
     print("Alright, first off", file=sys.stderr)
     print("1. Lets get the irc.server.name", file=sys.stderr)
     print("2. Your server info/server description/sdesc", file=sys.stderr)
@@ -465,3 +456,4 @@ except IndexError:
 #    for line in admin_info.split('|'):
 #        print '    "{0}";'.format(line.strip())
 # end contributed code
+=end
