@@ -1,18 +1,18 @@
 class Gen
   @@conf = "inspircd.conf"
   def self.conf
-    STDERR.puts "You have selected the #{@@conf} #{self} generator"
-  end
-  def self.oper
     STDERR.puts "You have selected the #{@@conf} generator"
+  end
+  def self.opers.conf
+    STDERR.puts "You have selected the #{@@conf} #{__method__.to_s} generator"
   end
   def self.connect
-    STDERR.puts "You have selected the #{@@conf} generator"
+    STDERR.puts "You have selected the #{@@conf} #{__method__.to_s} generator"
   end
-  def self.link
-    STDERR.puts "You have selected the #{@@conf} generator"
+  def self.links.conf
+    STDERR.puts "You have selected the #{@@conf} #{__method__.to_s} generator"
   end
-  def self.listen
-    STDERR.puts "You have selected the #{@@conf} generator"
+  def self.listen.conf
+    STDERR.puts "You have selected the #{@@conf} #{__method__.to_s} generator"
   end
 end

@@ -1,9 +1,11 @@
 #! /usr/bin/ruby2.0
+$:.unshift File.dirname($0)
 # -*- coding: utf-8 -*-
 #require 'optparse'
 require 'slop'
 require 'highline'
 
+require "generator"
 
 #Config
 @Version = [0,0,5]
@@ -15,14 +17,6 @@ require 'highline'
 admin_block = []
 hosts = []
 
-class Gen
-  def self.conf
-    STDERR.puts "You have selected the inspircd.conf file generator."
-  end
-  def self.oper
-    STDERR.puts "You have selected the inspircd opers.conf file generator."
-  end
-end
 
 opts = Slop.parse ARGV do |o|
   o.banner = "Usage: #{$0} [options] ....."
@@ -50,13 +44,13 @@ opts = Slop.parse ARGV do |o|
     when "conf"
       Gen.conf
     when "oper"
-      Gen.oper
-#    when "link"
-#      gen.link
-#    when "allow"
-#      gen.connect
-#    when "listen"
-#      gen.listen
+      Gen.opers.conf
+    when "link"
+      Gen.links.conf
+    when "connect"
+      Gen.connect
+    when "listen"
+      Gen.listen.conf
     else
       STDERR.puts "Invalid Selection."
       exit 1
