@@ -17,11 +17,11 @@ def checkInt(s):
     try:
         int(s)
     except:
-        print(colored("Error", "red", attrs=["bold"]) + ": Numeric must be an integer 0-254", file=sys.stderr) 
+        print(colored("Error", "red", attrs=["bold"]) + ": Numeric must be an integer 0-254", file=sys.stderr)
         sys.exit(2)
 def checkMethod(s):
     if s in ("ripemd160", "sha1", "md5"):
-        pass        
+        pass
     else:
         raise CustomError("Error: Method not supported")
 ###
@@ -30,8 +30,8 @@ def checkMethod(s):
 def makeArguments():
     p = ArgumentParser(formatter_class=RawTextHelpFormatter, description=
     """
-    -    This script can make your "job" as server owner, 
-    -    routing team member, or just starting your own 
+    -    This script can make your "job" as server owner,
+    -    routing team member, or just starting your own
     -    server up a whole lot easier
     -    Currently this script will have the capability of doing configuration
     -    files, except the allow, link, and oper blocks since they can be
@@ -46,7 +46,7 @@ def makeArguments():
 # Code
 def conf():
     stderr.puts "This is the configuration file generator"
-# Conf generation 
+# Conf generation
     # Me {}
     print("Alright, first off", file=sys.stderr)
     print("1. Lets get the irc.server.name", file=sys.stderr)
@@ -62,7 +62,7 @@ def conf():
     while True:
         line = input()
         if not line:
-            break 
+            break
         admin_block.append(line)
     #Class {}
     print("Alright, the next bit will get your settings for your 'clients' class", file=sys.stderr)
@@ -101,12 +101,12 @@ def conf():
 /*
 # - Regular comment
 // - Another comment
-/*text*/ 
+/*text*/
 # and /* */ can be inline comments
 and as you can see /**/ can also be multiline comments
 */
 """)
-    #   me {}    
+    #   me {}
     print(
 """
 me {
@@ -252,7 +252,7 @@ method
 '''
 Methods are ripemd160, sha1, and md5
 Use
-''' 
+'''
 password
 .
 '''
@@ -261,7 +261,7 @@ to use the default method 'ripemd160'
     oper_pass = input()
     oper_method = input()
     if oper_method != "-" and oper_method not in ("ripemd160", "sha1", "md5"):
-        raise CustomError("Error: Method not supported -> %s"% oper_method) 
+        raise CustomError("Error: Method not supported -> %s"% oper_method)
     print(
 """
 Want the user to need any modes before being able to oper?
@@ -314,9 +314,9 @@ If you don't want a swhois in this block, enter '.'
         if oper_method == "-":
             print("""    password "%s";"""% oper_pass)
         if oper_method != "-":
-            print_pass = genPass(oper_method, oper_pass) 
+            print_pass = genPass(oper_method, oper_pass)
             print("""    password "%s" { %s; };"""% (print_pass, oper_method))
-    if oper_rmodes:     
+    if oper_rmodes:
         if oper_rmodes == ".":
             pass
         if oper_rmodes != ".":
@@ -451,7 +451,7 @@ makeArguments()
 try:
     if sys.argv[1] in ("-h", "--help"):
 #        makeArguments()
-        p.print_help()     
+        p.print_help()
     if sys.argv[1] in ("-y", "--yes"):
         if __name__ == "__main__":
             main()

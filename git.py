@@ -3,19 +3,19 @@
 # -*- coding: utf-8 -*-
 #
 #  pygit
-#  
+#
 #  Copyright 2013 Ken Iota Spencer <ken.spencer20@ymail.com>
-#  
+#
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 2 of the License, or
 #  (at your option) any later version.
-#  
+#
 #  This program is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
-#  
+#
 #  You should have received a copy of the GNU General Public License
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
@@ -37,7 +37,7 @@ def makeArguments():
     """
     Python Git script. I'll think of a better description later
     """)
-    git = p.add_argument_group('Git', 
+    git = p.add_argument_group('Git',
     """
     Command line usage of Git
     """)
@@ -49,7 +49,7 @@ def makeArguments():
     """
     Usual commands that I add when I make scripts.
     """)
-    indie = p.add_argument_group('Independent', 
+    indie = p.add_argument_group('Independent',
     """
     Commands that are independent of the rest of the groups.
     """)
@@ -80,10 +80,10 @@ def makeConfig():
     config = ConfigParser()
     config.read('%s' % (args.config_path))
 def main():
-    
+
 if __name__ == "__main__":
     makeArguments()
     makeConfig()
     main()
 
-    
+

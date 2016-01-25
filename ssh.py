@@ -3,19 +3,19 @@
 # -*- coding: utf-8 -*-
 #
 #  pyssh
-#  
+#
 #  Copyright 2013 Ken Iota Spencer <ken.spencer20@ymail.com>
-#  
+#
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 2 of the License, or
 #  (at your option) any later version.
-#  
+#
 #  This program is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
-#  
+#
 #  You should have received a copy of the GNU General Public License
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
@@ -40,7 +40,7 @@ def makeArguments():
     key = p.add_argument_group('key', 'SSH Key specific commands.')
     usual = p.add_argument_group('usual', 'Usual Commands')
     server = p.add_argument_group('server', 'Server specific Commands')
-    pathg = p.add_argument_group('Config', 
+    pathg = p.add_argument_group('Config',
     '''
     Configuration Arguments
     ''')
@@ -66,7 +66,7 @@ If -f/--key-path <path> is given, read key from that path''')
     usual.add_argument('--editor', action='store', default='vi', dest='editor', help='Used with -e/--edit, but not needed for most uses')
     pathg.add_argument('--config-path', action='store', default=os.path.expanduser('~/ssh.ini'), dest='config_path', help=
     '''
-    Configuration File Path 
+    Configuration File Path
     (See example config (not made yet))
     (default: %(default)s)
     ''')
@@ -88,7 +88,7 @@ def autoconnect():
             port = config.get('DEFAULT', 'port')
         else:
             nport = 1
-            
+
     elif args.port:
         port = args.port
     if not args.user:
