@@ -1,4 +1,4 @@
-#! /usr/bin/env ruby
+#! /usr/bin/ruby2.0
 # -*- coding: utf-8 -*-
 #require 'optparse'
 require 'slop'
