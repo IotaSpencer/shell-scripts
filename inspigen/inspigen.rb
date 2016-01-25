@@ -11,31 +11,69 @@ require 'highline'
 ###
 # Code
 ###
-options = {}
+@options = {}
 admin_block = []
 hosts = []
-opts = Slop.parse do |o|
-  o.banner "Usage: #{ARGV[0]} [options] ....."
-  o.seperator ""
-  o.seperator "
-    -    This script can make your 'job' as server owner,
-    -    routing team member, or just starting your own
-    -    server up a whole lot easier
-    -    Currently this script will have the capability of doing configuration
-    -    files, except the allow, link, and oper blocks since they can be
-    -    included from elsewhere
-    "
-  o.string "-y", "--yes", "Show confirmation that you have read the help"
-  o.string "-t", "--type", "Type of configuration file to generate"
 
-  o.on '-v', '--version' do
-    puts @Version.join(".")
+class Gen
+  def self.conf
+    STDERR.puts "You have selected the inspircd.conf file generator."
+  end
+  def self.oper
+    STDERR.puts "You have selected the inspircd opers.conf file generator."
   end
 end
 
-puts opts
+opts = Slop.parse ARGV do |o|
+  o.banner = "Usage: #{$0} [options] ....."
+  o.separator ""
+  o.separator "Description:"
+  o.separator "
+        -    This script can make your 'job' as server owner,
+        -    routing team member, or just starting your own
+        -    server up a whole lot easier
+        -    Currently this script will have the capability of doing configuration
+        -    files, except the allow, link, and oper blocks since they can be
+        -    included from elsewhere
+        "
+  o.separator "Main Options:"
+  o.bool "-y", "--yes", "Show confirmation that you have read the help" do |y|
+    if y == true
+
+    elsif y == false
+      STDERR.puts "-y or --yes must be present, you have not read the help."
+      exit 1
+    end
+  end
+  o.string "-t", "--type", "Type of configuration file to generate" do |a|
+    case a
+    when "conf"
+      Gen.conf
+    when "oper"
+      Gen.oper
+#    when "link"
+#      gen.link
+#    when "allow"
+#      gen.connect
+#    when "listen"
+#      gen.listen
+    else
+      STDERR.puts "Invalid Selection."
+      exit 1
+    end
+  end
+
+  o.separator "Other Options"
+  o.on '-v', '--version' do
+    puts @Version.join(".")
+    exit
+  end
+end
+
+
 =begin
 # Code
+
 def conf():
     stderr.puts "This is the configuration file generator"
 # Conf generation
@@ -427,33 +465,10 @@ def listen():
 def genPass(TYPE, password):
     r = requests.post("https://rbradford.me/scripts/unrealgen.php", params={"type":TYPE, "password":password}, verify=False)
     return r.text
-def main():
-    makeArguments()
-    if args.TYPE == "conf":
-        conf()
-    elif args.TYPE == "oper":
-        oper()
-    elif args.TYPE == "link":
-        link()
-    elif args.TYPE == "allow":
-        allow()
-    elif args.TYPE == "listen":
-        listen()
-makeArguments()
-try:
-    if sys.argv[1] in ("-h", "--help"):
-#        makeArguments()
-        p.print_help()
-    if sys.argv[1] in ("-y", "--yes"):
-        if __name__ == "__main__":
-            main()
-except IndexError:
-    print("If you haven't read the help you will have no idea how to work this script.")
-    print("Hint: use '-h' or '--help' :P")
-    sys.exit(2)
+=end
+
 # following bit of code from http://stackoverflow.com/users/2431997/elmovankielmo
 # only bit modified is user_input to admin_info to fit rest of script
 #    for line in admin_info.split('|'):
 #        print '    "{0}";'.format(line.strip())
 # end contributed code
-=end
