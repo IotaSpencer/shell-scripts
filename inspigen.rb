@@ -5,9 +5,10 @@ require 'optparse'
 admin_block = []
 hosts = []
 #Config
-::Version = [0,0,5]
+@Version = [0,0,5]
 #Classes
-class CustomError(Exception):
+class GeneratorError < StandardError
+  
     def __init__(self, value):
         self.parameter = value
     def __str__(self):
