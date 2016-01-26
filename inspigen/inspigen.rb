@@ -39,7 +39,7 @@ opts = Slop.parse ARGV do |o|
       exit 1
     end
   end
-  o.string "-t", "--type", "Type of configuration file to generate" do |a|
+  o.string "-t", "--type", "Type of configuration file to generate Types: conf, oper, link, connect, listen" do |a|
     case a
     when "conf"
       Gen.conf
