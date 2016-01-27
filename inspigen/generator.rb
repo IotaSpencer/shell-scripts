@@ -23,11 +23,16 @@ class Gen
     me_net = a.ask "What Network Name? "
     # <admin>
     a.say "Your <admin> lines.."
-    admin_name = a.ask "Admin Real Name? "
-    admin_nick = a.ask "Admin Nick? "
-    admin_email = a.ask("Admin Email? ") do |q|
-      q.validate = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/
+    admin_lines = a.ask "#{@key} ?" do |q|
+      q.gather = 3
+      @key = (:name, :nick, :email)
     end
+#    admin_name = a.ask "Admin Real Name? "
+#    admin_nick = a.ask "Admin Nick? "
+#    admin_email = a.ask("Admin Email? ") do |q|
+#      q.validate = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/
+#    end
+    puts admin_lines
     # <connect> in Inspircd doesn't configure servers
     # so this is all client related options
     a.say "Alright, the next bit will get your settings for your <connect> block"
@@ -35,23 +40,24 @@ class Gen
     a.say "You can generate more <connect> blocks using the the '-t connect' options when starting the script."
     a.say "We also default to allow=\"*\""
 
-    a.say \
+    connect_pingfreq = a.ask(\
       "Ping Frequency: The number of seconds between pings from the server (90-240 recommended)
       This is the frequency at which the server pings you.
       You want to set this low enough that you have accurate/real connections,
-      but also high enough for some laggy or 'stupid' clients"
-    connect_pingfreq = a.ask("? ", Integer) do |q|
+      but also high enough for some laggy or 'stupid' clients
+      Default: 240", Integer) do |q|
       q.default = 240
       q.in = 0..300
-      q.answer_or_default
+
     end
+    puts connect_pingfreq
     a.say \
       "TimeOut: This is the amount of seconds the server will wait before disconnecting a
       user when doing registration (the auth aka. /nick /user, /pass)"
     connect_timeout = a.ask("? ", Integer) do |q|
       q.default = 240
       q.in = 0..300
-      q.answer_or_default
+
     end
 
     a.say "Max Local Clients: Specifies the maximum amount of clients <%= color(\"per IP\", :red, :bold) %> on this server
@@ -59,7 +65,7 @@ class Gen
     connect_localmax = a.ask("? ", Integer) do |q|
       q.default = 5
       q.in = 1..1000
-      q.answer_or_default
+
     end
 
     a.say "Max Global Clients: Specifies the maximum amount of clients <%= color(\"per IP\", :red, :bold) %> network-wide
@@ -67,7 +73,7 @@ class Gen
     connect_globalmax = a.ask("? ", Integer) do |q|
       q.default = 5
       q.in = 1..1000
-      q.answer_or_default
+
     end
     a.say \
       "Max Channels: Specifies the maximum number of channels users in this block can join.
@@ -77,21 +83,21 @@ class Gen
     connect_maxchans = a.ask("? ", Integer) do |q|
       q.default = 100
       q.in = 20..1000
-      q.answer_or_default
+
     end
     a.say "Send Quota(SendQ): Amount of data that can be in the send queue
     Note: ~100000+ recommended "
     connect_sendq = a.ask("? ", Integer) do |q|
       q.default = 131074
       q.in = 0..1000000
-      q.answer_or_default
+
     end
     a.say "Receive Quota(RecvQ): Amount of data that can be in the receive queue
     Note: 3000-8000 recommended "
     connect_recvq = a.ask("? ", Integer) do |q|
       q.default = 4096
       q.in = 3000..10000
-      q.answer_or_default
+
     end
     a.say "<%= color(\"-----------------------------------\", :red, :bold) %>"
 
