@@ -1,4 +1,4 @@
-#! /usr/bin/ruby2.0
+#! /usr/bin/ruby2.1
 $:.unshift File.dirname($0)
 # -*- coding: utf-8 -*-
 #require 'optparse'

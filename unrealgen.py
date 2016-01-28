@@ -24,7 +24,7 @@ def checkInt(s):
         print(colored("Error", "red", attrs=["bold"]) + ": Numeric must be an integer 0-254", file=sys.stderr)
         sys.exit(2)
 def checkMethod(s):
-    if s in ("ripemd160", "sha1", "md5"):
+    if s in ("ripemd160", "sha256", "md5"):
         pass
     else:
         raise CustomError("Error: Method not supported")

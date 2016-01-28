@@ -20,25 +20,29 @@ class Gen
     me_id = a.ask("SID? ") do |q|
       q.validate = /\d[0-9A-Z][0-9A-Z]/
     end
+
     me_net = a.ask "What Network Name? "
     # <admin>
-    a.say "Your <admin> lines.."
-    admin_lines = a.ask "#{@key} ?" do |q|
+
+    a.say "\
+    Here we get our <admin> lines.
+    1. Your Name
+    2. Your Nick
+    3. Your e-mail
+    "
+    admin_lines = a.ask "" do |q|
       q.gather = 3
-      @key = (:name, :nick, :email)
     end
-#    admin_name = a.ask "Admin Real Name? "
-#    admin_nick = a.ask "Admin Nick? "
-#    admin_email = a.ask("Admin Email? ") do |q|
-#      q.validate = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/
-#    end
-    puts admin_lines
-    # <connect> in Inspircd doesn't configure servers
-    # so this is all client related options
-    a.say "Alright, the next bit will get your settings for your <connect> block"
-    a.say "First thing, since conf generation usually means you're starting out, we're going to default to allow."
-    a.say "You can generate more <connect> blocks using the the '-t connect' options when starting the script."
-    a.say "We also default to allow=\"*\""
+
+    a.say \
+      "\
+      Alright, the next bit will get your   settings for your <connect> block.
+
+      First thing, since conf generation usually means you're starting out, we're going to default to allow.
+
+      You can generate more <connect> blocks using the the '-t connect' options when starting the script.
+
+      We also default to allow=\"*\""
 
     connect_pingfreq = a.ask(\
       "Ping Frequency: The number of seconds between pings from the server (90-240 recommended)
@@ -48,16 +52,12 @@ class Gen
       Default: 240", Integer) do |q|
       q.default = 240
       q.in = 0..300
-
     end
-    puts connect_pingfreq
     a.say \
-      "TimeOut: This is the amount of seconds the server will wait before disconnecting a
-      user when doing registration (the auth aka. /nick /user, /pass)"
+      "TimeOut: This is the amount of seconds the server will wait before disconnecting a user when doing registration (the auth aka. /nick /user, /pass) \t"
     connect_timeout = a.ask("? ", Integer) do |q|
       q.default = 240
       q.in = 0..300
-
     end
 
     a.say "Max Local Clients: Specifies the maximum amount of clients <%= color(\"per IP\", :red, :bold) %> on this server
