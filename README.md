@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #ssh.ini#
 	Example configuration for the pyssh executable
 #git.ini#
@@ -20,3 +21,9 @@
 	Starts weechat and other things
 #unrealgen#
 	Script that makes configuration files, oper blocks, or link blocks
+=======
+# Inspigen
+Generates InspIRCd Configuration files
+
+Written under the MIT License
+>>>>>>> Inspigen/master

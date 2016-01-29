@@ -5,7 +5,8 @@ $:.unshift File.dirname($0)
 require 'slop'
 require 'highline'
 
-require "generator"
+require "questions"
+
 
 #Config
 @Version = [0,0,5]

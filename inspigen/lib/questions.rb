@@ -1,8 +1,9 @@
 $:.unshift File.dirname($0)
 require "highline"
-
+require "printmod"
 
 class Gen
+  include Print
   @@conf = "Inspircd"
   def self.conf
     STDERR.puts "You have selected the #{@@conf.downcase}.conf generator"

@@ -1,7 +1,7 @@
 require "highline"
 
 module Print
-  def Print.conf()
+  def conf
     attr_accessor :me_name, :me_info, :me_id, :me_net
     attr_accessor :admin_name, :admin_nick, :admin_email
     attr_accessor :connect_maxchans, :connect_timeout, :connect_pingfreq, :connect_sendq, :connect_recvq, :connect_localmax, :connect_globalmax, :connect_umodes
