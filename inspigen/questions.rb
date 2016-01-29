@@ -24,44 +24,34 @@ class Gen
     me_net = a.ask "What Network Name? "
     # <admin>
 
-    a.say "\
-    Here we get our <admin> lines.
+    a.say \
+    "Here we get our <admin> lines.
     1. Your Name
     2. Your Nick
-    3. Your e-mail
-    "
-    admin_lines = a.ask "" do |q|
-      q.gather = 3
+    3. Your e-mail"
+    admin_line = a.ask("What is your <%= key %>:") do |q|
+      q.gather = {"e-mail" => "", "name" => "", "nick" => ""}
     end
 
     a.say \
-      "\
-      Alright, the next bit will get your   settings for your <connect> block.
-
-      First thing, since conf generation usually means you're starting out, we're going to default to allow.
-
-      You can generate more <connect> blocks using the the '-t connect' options when starting the script.
-
+      "Alright, the next bit will get your settings for your <connect> block. First thing, since conf generation usually means you're starting out, we're going to default to allow. You can generate more <connect> blocks using the the '-t connect' options when starting the script.
       We also default to allow=\"*\""
 
-    connect_pingfreq = a.ask(\
-      "Ping Frequency: The number of seconds between pings from the server (90-240 recommended)
-      This is the frequency at which the server pings you.
-      You want to set this low enough that you have accurate/real connections,
-      but also high enough for some laggy or 'stupid' clients
-      Default: 240", Integer) do |q|
+    connect_pingfreq = a.ask("\
+Ping Frequency: The number of seconds between pings from the server (90-240 recommended)
+This is the frequency at which the server pings you.
+You want to set this low enough that you have accurate/real connections, but also high enough for some laggy or 'stupid' clients.", Integer) do |q|
       q.default = 240
       q.in = 0..300
     end
-    a.say \
-      "TimeOut: This is the amount of seconds the server will wait before disconnecting a user when doing registration (the auth aka. /nick /user, /pass) \t"
-    connect_timeout = a.ask("? ", Integer) do |q|
-      q.default = 240
+    connect_timeout = a.ask("TimeOut: This is the amount of seconds the server will wait before disconnecting a user when doing registration (the auth aka. /nick /user, /pass)? ", Integer) do |q|
+      q.default = 60
       q.in = 0..300
     end
 
-    a.say "Max Local Clients: Specifies the maximum amount of clients <%= color(\"per IP\", :red, :bold) %> on this server
-    Note: 3-5 recommended "
+    a.say "Max Local Clients: Specifies the maximum amount of clients <%= color(\"per IP\", :red, :bold) %> on this server.
+
+    Note: 3-5 recommended"
     connect_localmax = a.ask("? ", Integer) do |q|
       q.default = 5
       q.in = 1..1000
@@ -69,35 +59,38 @@ class Gen
     end
 
     a.say "Max Global Clients: Specifies the maximum amount of clients <%= color(\"per IP\", :red, :bold) %> network-wide
-    Note: 3-5 recommended "
+    Note: 3-5 recommended"
     connect_globalmax = a.ask("? ", Integer) do |q|
       q.default = 5
       q.in = 1..1000
 
     end
-    a.say \
-      "Max Channels: Specifies the maximum number of channels users in this block can join.
-      This overrides every other maxchans setting.
-      Note: The validation range goes to 1000, if you want to increase it, enter a random
-      number or accept the default. "
-    connect_maxchans = a.ask("? ", Integer) do |q|
+    connect_maxchans = a.ask("Max Channels: Specifies the maximum number of channels users in this block can join. The validation range goes to 1000, if you want to increase it, enter a random number or accept the default.  This overrides every other maxchans setting.", Integer) do |q|
       q.default = 100
       q.in = 20..1000
-
     end
+
+    a.say ""
     a.say "Send Quota(SendQ): Amount of data that can be in the send queue
-    Note: ~100000+ recommended "
-    connect_sendq = a.ask("? ", Integer) do |q|
+    Note: ~100000+ recommended"
+    connect_sendq = a.ask("? ") do |q|
       q.default = 131074
       q.in = 0..1000000
 
     end
+
+    a.say ""
     a.say "Receive Quota(RecvQ): Amount of data that can be in the receive queue
-    Note: 3000-8000 recommended "
-    connect_recvq = a.ask("? ", Integer) do |q|
+    Note: 3000-8000 recommended."
+    connect_recvq = a.ask("? ") do |q|
       q.default = 4096
       q.in = 3000..10000
+    end
 
+    a.say ""
+    a.say "Modes on Connect: If you want to have certain user modes added to clients on connect, put them here."
+    connect_umodes = a.ask("? ") do |q|
+      q.default = "+ix"
     end
     a.say "<%= color(\"-----------------------------------\", :red, :bold) %>"
 
@@ -122,9 +115,9 @@ and as you can see /**/ can also be multiline comments
 #   <admin>
     puts \
 "<admin
-  name=\"#{admin_name}\"
-  nick=\"#{admin_nick}\"
-  email=\"#{admin_email}\">"
+  name=\"#{admin_line[0]}\"
+  nick=\"#{admin_line[1]}\"
+  email=\"#{admin_line[2]}\">"
 #   <connect>
     puts \
 "<connect
