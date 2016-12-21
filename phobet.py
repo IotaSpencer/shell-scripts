@@ -20,33 +20,48 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #  MA 02110-1301, USA.
 
+from __future__ import print_function
+import sys
+import string
 bet = {
-    'Alpha': 'A',
-    'Bravo': 'B',
-    'Charlie': 'C',
-    'Delta': 'D',
-    'Echo': 'E',
-    'Foxtrot': 'F',
-    'Gulf': 'G',
-    'Hotel': 'H',
-    'India': 'I',
-    'Juliet': 'J',
-    'Kilo': 'K',
-    'Lima': 'L',
-    'Mike': 'M',
-    'November': 'N',
-    'Oscar': 'O',
-    'Papa': 'P',
-    'Quebec': 'Q',
-    'Romeo': 'R',
-    'Sierra': 'S',
-    'Tango': 'T',
-    'Uniform': 'U',
-    'Victor': 'V',
-    'Whiskey': 'W',
-    'X-Ray': 'X',
-    'Yankee': 'Y',
-    'Zulu': 'Z'
+    'A': 'Alpha',
+    'C': 'Charlie',
+    'B': 'Bravo',
+    'E': 'Echo',
+    'D': 'Delta',
+    'G': 'Gulf',
+    'F': 'Foxtrot',
+    'I': 'India',
+    'H': 'Hotel',
+    'K': 'Kilo',
+    'J': 'Juliet',
+    'M': 'Mike',
+    'L': 'Lima',
+    'O': 'Oscar',
+    'N': 'November',
+    'Q': 'Quebec',
+    'P': 'Papa',
+    'S': 'Sierra',
+    'R': 'Romeo',
+    'U': 'Uniform',
+    'T': 'Tango',
+    'W': 'Whiskey',
+    'V': 'Victor',
+    'Y': 'Yankee',
+    'X': 'X-Ray',
+    'Z': 'Zulu',
 }
-for k, v in sorted(bet.iteritems()):
-    print k, v
+#print sys.argv[1]
+words = sys.argv[1:]
+characters = ' '.join(words)
+print(characters)
+for i, c in enumerate(characters):
+    if c == ' ':
+        print('/', end='')
+    elif c in string.letters:
+        if characters[i+1] == ',':
+            print(bet[c.upper()], end='')
+        else:
+            print(bet[c.upper()]+'', sep=" ", end="")
+    elif c in string.punctuation:
+        print(c, end='')
