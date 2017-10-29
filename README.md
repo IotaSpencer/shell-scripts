@@ -1,27 +1,25 @@
-<<<<<<< HEAD
-#ssh.ini#
+## ssh.ini
 	Example configuration for the pyssh executable
-#git.ini#
+## git.ini
 	Example configuration for the pygit executable
-#phobet#
+## phobet
 	Prints the phonetic alphabet
-#pydnsbl#
+## pydnsbl
 	WIP.. Command Line Utility that will scan the ip(s) given and check if they are in a blacklist
-#pygit#
+## pygit
 	git stuff
-#pyircd#
+## pyircd
 	connect through ssh to work on ircds etc.
-#pymc#
+## pymc
 	Does minecraft stuff
-#pyrirc#
+## pyrirc
 	Starts reddit_irc
-#pyssh#
+## pyssh
 	Connects to ssh servers given directives in ssh.ini (~/.ssh/config can probably deprecate this)
-#pywee#
+## pywee
 	Starts weechat and other things
-#unrealgen#
+## unrealgen
 	Script that makes configuration files, oper blocks, or link blocks
-=======
 # Inspigen
 Generates InspIRCd Configuration files
 
